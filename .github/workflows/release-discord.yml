@@ -1,19 +1,15 @@
 name: Release to Discord
-
 on:
+  workflow_dispatch:
   release:
     types: [published]
-  workflow_dispatch:
-
+    
 jobs:
-  notify-discord:
+  run:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Send message to Discord
+      - uses: actions/checkout@v2
+      - name: Run Discord Webhook
         uses: tsickert/discord-webhook@v1.0.1
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
