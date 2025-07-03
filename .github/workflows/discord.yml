@@ -1,4 +1,4 @@
-name: Notify Discord on Release
+name: Release to Discord
 
 on:
   release:
@@ -10,15 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Send release notification to Discord
-        uses: Ilshidur/action-discord@master
+      - name: Send message to Discord
+        uses: tsickert/discord-webhook@v1.0.1
         with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          message: |
-            **🚨 New Release Published!**
-            📝 `${{ github.event.release.name }}`
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+          content: |
+            🚨 **New Release Published!**
+            📝 **${{ github.event.release.name }}**
             🔗 [View Release](${{ github.event.release.html_url }})
-            🕒 Released at: `${{ github.event.release.published_at }}`
