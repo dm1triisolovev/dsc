@@ -18,3 +18,4 @@ jobs:
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
           content: "Update"
+          username: "DSC"
